@@ -29,7 +29,7 @@ with open("run.py", "w") as p:
     sys.stdout = originalStdout
 
 try:
-    output = str(subprocess.check_output(["python3", "b.py"])) 
+    output = str(subprocess.check_output(["python3", "run.py"])) 
     output = output[3:len(output) - 4]
     print(output)
 except: 

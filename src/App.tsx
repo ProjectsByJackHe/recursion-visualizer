@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './App.css';
-import TestAnimations from './components/test-animations'
+import Controls from './components/controls'
+import CodeEditor from './components/code-editor'
 
 function App() {
-  return (
-    <TestAnimations />
+  return ( 
+  <Fragment>
+    <CodeEditor />
+    <Controls />
+  </Fragment>
   );
 }
 

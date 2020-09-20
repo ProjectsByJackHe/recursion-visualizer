@@ -1,0 +1,6 @@
+.CodeMirror {
+    font-size: 20px;
+    resize: vertical;
+    overflow: auto;
+    border: 4px solid #b6b4b4;
+}

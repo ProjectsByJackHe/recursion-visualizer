@@ -4,4 +4,4 @@ The main responsibility here is to inject custom code into whatever the user wro
 track the recursive call structure and send that back to the frontend to visualize the
 end result. 
 
-# Link to the frontend: [Frontend](https://github.com/ProjectsByJackHe/recursion-visualizer-frontend)
+## Link to the frontend: [Frontend](https://github.com/ProjectsByJackHe/recursion-visualizer-frontend)

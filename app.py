@@ -1,9 +1,9 @@
 import flask 
 from flask import request
+from flask_cors import CORS
 
 app = flask.Flask(__name__) 
-
-app.config["DEBUG"] = True
+CORS(app)
 
 # for each flask request, we need: 
 # - data in the body to represent function logic
@@ -16,7 +16,8 @@ def execute():
     if 'funcName' in request.args and 'funcCall' in request.args: 
         funcName = request.args['funcName'] 
         funcCall = request.args['funcCall']
-        return "<h1>Congrats! You entered " + funcName + " as function name and " + funcCall + " as your function call. </h1>"
+        body = str(request.data)
+        return "<h1>Congrats! You entered " + funcName + " as function name and " + funcCall + " as your function call. </h1> <p>" + body + "</p>"
     else: 
         return "<h1> Please specify both the function name and the initial function call. </h1>"
 

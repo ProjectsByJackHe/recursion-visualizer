@@ -5,3 +5,6 @@ track the recursive call structure and send that back to the frontend to visuali
 end result. 
 
 ## Link to the frontend: [Frontend](https://github.com/ProjectsByJackHe/recursion-visualizer-frontend)
+
+As of right now, this backend only supports small ~ medium sized inputs for any given recursive algorithm 
+submitted by the user. 

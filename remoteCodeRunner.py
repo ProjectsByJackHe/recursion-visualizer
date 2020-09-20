@@ -1,6 +1,6 @@
 import sys 
 import subprocess
-import injectcode as ij 
+import injectCode as ij 
 
 originalStdout = sys.stdout
 

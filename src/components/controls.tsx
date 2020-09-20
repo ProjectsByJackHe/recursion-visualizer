@@ -1,10 +1,11 @@
 import React, {Fragment} from 'react'
+import { Button } from '@material-ui/core'
 import "./controls.css"
 
-const Controls = () => {
+const Controls = (props: any) => {
     return <Fragment>
         <div className="ControlPanel">
-            <button> Run Code </button>
+            <Button variant="contained" color="primary" style = {{marginLeft: "10px"}} onClick={props.runCode}> Run Code </Button>
         </div>
     </Fragment>
 }

@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment} from 'react'
 import {UnControlled as CodeMirror} from 'react-codemirror2'
 import './codemirror.css'
 
@@ -19,13 +19,11 @@ const DEFAULT_PYTHON_OPTIONS = {
   };
   
 
-const CodeEditor = () => {
-    const [code, setCode] = useState("# Please include EXACTLY ONE function definition. Don't forget to call your function in the end!")
-
+const CodeEditor = (props: any) => {
     return <Fragment>
         <div className="mirror-wrapper">
             <CodeMirror
-                value={code}
+                value={props.code}
                 options={{
                     ...DEFAULT_PYTHON_OPTIONS,
                     theme: 'material'
@@ -35,8 +33,7 @@ const CodeEditor = () => {
                     next()
                 }}
                 onChange={(editor, data, value) => {
-                    console.log(value)
-                    setCode(value)
+                    props.setCode(value)
                 }}
             />
         </div>

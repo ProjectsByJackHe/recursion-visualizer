@@ -1,13 +1,11 @@
 import React, {Fragment} from 'react';
 import './App.css';
-import Controls from './components/controls'
-import CodeEditor from './components/code-editor'
+import UserInput from './components/userinput'
 
 function App() {
   return ( 
   <Fragment>
-    <CodeEditor />
-    <Controls />
+    <UserInput />
   </Fragment>
   );
 }

@@ -1,7 +1,7 @@
 import flask 
 from flask import request
 from flask_cors import CORS
-
+import parseinput as pi
 import remoteCodeRunner as rc
 
 app = flask.Flask(__name__) 
@@ -19,9 +19,10 @@ def execute():
         funcName = request.args['funcName'] 
         funcCall = request.args['funcCall']
         body = str(request.data)
-        functionTrace = rc.runCode(body, funcName, funcCall)
+        inputCode = pi.parseInput(body)
+        functionTrace = rc.runCode(inputCode, funcName, funcCall)
 
-        if functionTrace[0]: 
+        if functionTrace[0]:  
             # success case
             # set response status to 200
             return functionTrace[1], 200
@@ -29,6 +30,7 @@ def execute():
             # case of invalid value
             # set reponse status to 403
             return functionTrace[1], 403
+        return inputCode
     else: 
         # case of an invalid request
         return "Please specify both the function name and the initial function call."

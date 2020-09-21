@@ -20,10 +20,16 @@ def runCode(inputCode, inputFunctionName, inputFunctionCall):
         sys.stdout = p 
         print(readyToExe) # print in this instance writes to file instead of outputting text
         sys.stdout = originalStdout
-
     try:
         output = str(subprocess.check_output(["python3", "run.py"])) 
         output = output[3:len(output) - 4]
-        print(output)
+        return (True, output)
     except: 
-        print('ERROR!')
+        return (False, "Check that syntax is correct, or perhaps there is an issue in your specific implementation.")
+
+runCode(""" 
+def foo(x): 
+    if x == 0: 
+        return 0 
+    return foo(x - 1)
+""", "foo", "foo(23)")

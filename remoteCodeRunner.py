@@ -12,14 +12,15 @@ def runCode(inputCode, inputFunctionName, inputFunctionCall):
 
     # All the inputs we will collect from the frontend:
     # inputCode here is truncated to exclude the single function call. 
+    
+    print(inputCode)
 
     readyToExe = ij.injectCode(inputCode, inputFunctionName, inputFunctionCall)
 
 
-    with open("run.py", "r+") as p: 
-        p.seek(0)
+    with open("run.py", "w") as p: 
         p.write(readyToExe)
-        p.truncate()
+        p.flush()
     
     try:
         output = str(subprocess.check_output(["python3", "run.py"])) 

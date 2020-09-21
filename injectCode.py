@@ -1,6 +1,3 @@
-finalOutput = ""
-
-
 # alwaysInject = """
 # class Call: 
 # def __init__(self, params, level): 
@@ -27,11 +24,11 @@ bwmSjveL3Lc = []
 # print(response)
 # """
 alwaysInjectLast = """
-response = "|"
+ePpPVE_GGJw = "|"
 for call in bwmSjveL3Lc: 
     segment = str(call.params) + ":" + str(call.result) + ":" + str(call.level) + "|"
-    response += segment
-print(response)
+    ePpPVE_GGJw += segment
+print(ePpPVE_GGJw)
 """
 
 # injectInBeginningOfFunc1 = """    
@@ -155,7 +152,7 @@ def addZero(inputFunctionCall):
     return inputFunctionCall
 
 def injectCode(inputCode, inputFunctionName, inputFunctionCall):
-    global finalOutput
+    finalOutput = ""
     finalOutput += alwaysInject 
     inputCode = injectCallFunction(inputCode, inputFunctionName)
     inputCode = addLevelParameter(inputCode, inputFunctionName)

@@ -13,7 +13,7 @@ CORS(app)
 # if either is missing, we send back an error message. If the remote 
 # code execution raises an error, we send back that error message as well. 
 
-@app.route('/execute', methods=['GET', 'POST'])
+@app.route('/execute', methods=['POST'])
 def execute(): 
     if 'funcName' in request.args and 'funcCall' in request.args: 
         funcName = request.args['funcName'] 

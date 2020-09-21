@@ -9,12 +9,8 @@ require("codemirror/lib/codemirror.css");
 
 const DEFAULT_PYTHON_OPTIONS = {
     autoCloseBrackets: true,
-    cursorScrollMargin: 48,
     mode: "python",
     lineNumbers: true,
-    indentUnit: 2,
-    tabSize: 2,
-    styleActiveLine: true, 
     class: "CodeMirror"
   };
   

@@ -2,11 +2,12 @@ import React, {Fragment, useState} from 'react'
 import Controls from './controls'
 import CodeEditor from './code-editor'
 import { getFuncName, getFuncCall, truncateFuncCall } from '../util/utility-functions'
+import { isPropertySignature } from 'typescript'
 
 
 
-const UserInput = () => {
-    const [code, setCode] = useState("# Include at least one recursive function. Don't forget to call your function.")
+const UserInput = (props: any) => {
+    const [code, setCode] = useState("")
     
     const runCode = async () => {
         // extract function name 
@@ -55,7 +56,12 @@ const UserInput = () => {
         
         if (callTrace && noError) {
             // render callTrace
-            console.log(callTrace)
+            const arrOfStr = callTrace.split('|') 
+            const arrOfCalls = [] 
+            for (let str of arrOfStr) {
+                arrOfCalls.push(str.split(':'))
+            }
+            props.setArrOfCalls(arrOfCalls)
         }
     }
     

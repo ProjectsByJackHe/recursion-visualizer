@@ -30,7 +30,7 @@ const UserInput = () => {
         console.log("code to send: " + codeToSend)
 
         let callTrace;
-
+        let noError = true
         try {
             // send HTTP request to flask server and store 
             // response inside callTrace
@@ -42,14 +42,18 @@ const UserInput = () => {
             }
             let response = await fetch(domain + options, fetchConfig)
             callTrace  = await response.text()
+            if (!(response.ok)) {
+                throw new Error(callTrace)
+            }
         } catch (e) {
             // if and when there is some error executing the python code on the server, 
             // the flask server will send back some sort of error response. We will 
             // catch that case here and alert the user accordingly
             alert("There was an error executing your code. Details: " + e)
+            noError = false
         }
         
-        if (callTrace) {
+        if (callTrace && noError) {
             // render callTrace
             console.log(callTrace)
         }

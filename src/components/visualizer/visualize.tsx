@@ -1,3 +1,4 @@
+import { strict } from 'assert'
 import React, {Fragment} from 'react'
 
 /**
@@ -10,17 +11,27 @@ import React, {Fragment} from 'react'
 
 const Visualizer = (props: any) => {
     const callTrace = props.arrOfCalls 
+    // const automaticMode = props.automaticMode
+    // if (automaticMode) {
+    //     const renderSpeed = props.renderSpeed 
+    // } else {
+    //     // manual mode
+    //     const renderIndex = props.renderIndex
+    // }
+    // create a call hierarchy. 
 
+    const tree = <div></div>
     return <Fragment>
-        <ol>
-        {
-            callTrace.map((call: String[]) => {
-                return <li>
-                    {call[0] + " || " + call[1] + "||" + call[2]}
-                </li>
-            })
-        }
-        </ol>
+        <div style={{textAlign: "center", display: "flex"}}>
+        {callTrace.map((call: string[]) => {
+                const intrep = parseInt(call[2]) * 50
+                const marginTop = (intrep).toString() + "px"
+    
+                return <div style={{marginTop:marginTop, fontSize: "30px", marginLeft: "10px", marginRight: "10px"}}>
+                    {"fib" + call[0]}
+                </div>
+        })}
+        </div>
     </Fragment>
 }
 

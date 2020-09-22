@@ -2,12 +2,11 @@ import React, {Fragment, useState} from 'react'
 import Controls from './controls'
 import CodeEditor from './code-editor'
 import { getFuncName, getFuncCall, truncateFuncCall } from '../util/utility-functions'
-import { isPropertySignature } from 'typescript'
 
 
 
 const UserInput = (props: any) => {
-    const [code, setCode] = useState("")
+    const [code, setCode] = useState("# Don't use your tabs. This editor has smart indention enabled. Just press 'enter'")
     
     const runCode = async () => {
         // extract function name 
@@ -58,8 +57,8 @@ const UserInput = (props: any) => {
             // render callTrace
             const arrOfStr = callTrace.split('|') 
             const arrOfCalls = [] 
-            for (let str of arrOfStr) {
-                arrOfCalls.push(str.split(':'))
+            for (let i = arrOfStr.length - 1; i >= 0; i--) {
+                arrOfCalls.push(arrOfStr[i].split(':'))
             }
             props.setArrOfCalls(arrOfCalls)
         }

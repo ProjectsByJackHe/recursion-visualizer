@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import {UnControlled as CodeMirror} from 'react-codemirror2'
+import {Controlled as CodeMirror} from 'react-codemirror2'
 import './codemirror.css'
 
 require("codemirror/theme/material.css");
@@ -12,7 +12,7 @@ const DEFAULT_PYTHON_OPTIONS = {
     mode: "python",
     lineNumbers: true,
     class: "CodeMirror"
-  };
+};
   
 
 const CodeEditor = (props: any) => {
@@ -24,11 +24,8 @@ const CodeEditor = (props: any) => {
                     ...DEFAULT_PYTHON_OPTIONS,
                     theme: 'material'
                 }} 
-                onBeforeChange={(editor, data, value, next) => {
+                onBeforeChange={(editor, data, value) => {
                     // Execute anything before onChange
-                    next()
-                }}
-                onChange={(editor, data, value) => {
                     props.setCode(value)
                 }}
             />

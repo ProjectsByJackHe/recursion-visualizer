@@ -7,9 +7,9 @@
 # functionCalls_ = []
 alwaysInject = """
 class JQGRg8XBnB4: 
-    def __init__(self, params, level): 
+    def __init__(self, params, caller): 
         self.params = params 
-        self.level = level 
+        self.caller = caller 
         self.result = None 
 
 bwmSjveL3Lc = []
@@ -26,7 +26,7 @@ bwmSjveL3Lc = []
 alwaysInjectLast = """
 ePpPVE_GGJw = "|"
 for call in bwmSjveL3Lc: 
-    segment = str(call.params) + ":" + str(call.result) + ":" + str(call.level) + "|"
+    segment = str(call.params) + ":" + str(call.result) + ":" + str(call.caller) + "|"
     ePpPVE_GGJw += segment
 print(ePpPVE_GGJw)
 """
@@ -34,11 +34,10 @@ print(ePpPVE_GGJw)
 # injectInBeginningOfFunc1 = """    
 #   c = Call(["""
 # injectInBeginningOfFunc2 = """], WZwr2a_lFWY)
-#   WZwr2a_lFWY += 1"""
+
 injectInBeginningOfFunc1 = """    
   tFRcEOmkDM8 = JQGRg8XBnB4(["""
-injectInBeginningOfFunc2 = """], WZwr2a_lFWY)
-  WZwr2a_lFWY += 1"""
+injectInBeginningOfFunc2 = """], WZwr2a_lFWY)"""
 
 # we need to add indentation to every line here accordingly. 
 # constantLinesToAdd = "c.result = r; functionCalls_.append(c); return r"
@@ -123,23 +122,23 @@ def injectCallFunction(inputCode, inputFunctionName):
             right = inputCode[leftBound:]
             inputParameters = collection[1] 
             injectInBeginningOfFunc = injectInBeginningOfFunc1 + inputParameters + injectInBeginningOfFunc2
-            return left + injectInBeginningOfFunc + right 
+            return [left + injectInBeginningOfFunc + right, inputParameters]
         
 
-# adds the level parameter to every single instance of the function call
-# EDGE CASE: the code the user submits already contains the 'level' parameter, 
-# which could lead to bugs and confusion. That is why I am going to rename 'level' to 
-# something else. Something random. 
-# LET: WZwr2a_lFWY = level. 
-def addLevelParameter(inputCode, inputFunctionName):
-    level = "WZwr2a_lFWY"
+# adds the 'caller' parameter to every single instance of the function call
+def addLevelParameter(inputCode, inputFunctionName, caller):
     s = 0
+    isFirstFunc = True
     while s < len(inputCode): 
         if checkIsFuncName(inputFunctionName, inputCode, s): 
             cut = s + len(inputFunctionName) + 1  
             left = inputCode[:cut] 
             right = inputCode[cut:] 
-            inputCode = left + level + ", " + right
+            if isFirstFunc:
+                inputCode = left + "WZwr2a_lFWY" + ", " + right
+                isFirstFunc = False 
+            else: 
+                inputCode = left + "[" + caller + "]" + ", " + right
         s += 1
     return inputCode
 def addZero(inputFunctionCall): 
@@ -154,8 +153,9 @@ def addZero(inputFunctionCall):
 def injectCode(inputCode, inputFunctionName, inputFunctionCall):
     finalOutput = ""
     finalOutput += alwaysInject 
-    inputCode = injectCallFunction(inputCode, inputFunctionName)
-    inputCode = addLevelParameter(inputCode, inputFunctionName)
+    paramsInjection = injectCallFunction(inputCode, inputFunctionName)
+    inputCode = paramsInjection[0]
+    inputCode = addLevelParameter(inputCode, inputFunctionName, paramsInjection[1])
     finalOutput += addCustomReturnStatements(inputCode)
     finalOutput += addZero(inputFunctionCall)
     finalOutput += alwaysInjectLast

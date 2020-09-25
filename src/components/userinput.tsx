@@ -61,6 +61,7 @@ const UserInput = (props: any) => {
                 arrOfCalls.push(arrOfStr[i].split(':'))
             }
             props.setArrOfCalls(arrOfCalls)
+            props.setFuncName(functionName)
         }
     }
     

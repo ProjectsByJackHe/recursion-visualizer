@@ -6,7 +6,7 @@ import Visualizer from './components/visualizer/visualize'
 function App() {
   const [arrOfCalls, setArrOfCalls] = useState([])
   const [automaticMode, setAutomaticMode] = useState(true) 
-
+  const [funcName, setFuncName] = useState("")
   // if automaticMode == true: 
   const [renderSpeed, setRenderSpeed] = useState(1000) 
   
@@ -20,12 +20,14 @@ function App() {
         setAutomaticMode={setAutomaticMode}
         setRenderSpeed={setRenderSpeed}
         setRenderIndex={setRenderIndex}
+        setFuncName={setFuncName}
       />
       <Visualizer
         arrOfCalls={arrOfCalls}
         automaticMode={automaticMode}
         renderSpeed={renderSpeed}
         renderIndex={renderIndex}
+        name={funcName}
       />
     </Fragment>
   );

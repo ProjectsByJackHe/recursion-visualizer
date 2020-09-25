@@ -8,7 +8,7 @@ function App() {
   const [automaticMode, setAutomaticMode] = useState(true) 
   const [funcName, setFuncName] = useState("")
   // if automaticMode == true: 
-  const [renderSpeed, setRenderSpeed] = useState(1000) 
+  const [renderSpeed, setRenderSpeed] = useState(500) 
   
   // if automaticMode == false: 
   const [renderIndex, setRenderIndex] = useState(0)

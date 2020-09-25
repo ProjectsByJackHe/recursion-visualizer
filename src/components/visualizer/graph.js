@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { Graph } from 'react-d3-graph'
-import { parseNodesFromCalls } from '../../util/graph-util'
+import { parseNodesFromCalls, parseEdgesFromNodes } from '../../util/graph-util'
 /**
  * TODO: 
  * - take a list of function calls, and write every parameter call to node. 
@@ -13,33 +13,44 @@ const GraphComponent = (props) => {
         code here to always run whenever callTrace changes.
         incrementally add values from callTrace to renderTrace
     */
-   const ANIMATION_SPEED = 1000; // milliseconds per interval
+   const funcName = props.name 
+   const callTrace = props.callTrace
+   const ANIMATION_SPEED = props.renderSpeed; // milliseconds per interval
+
    const [graphState, setGraphState] = useState({
-       nodes: [{id: "0", color: "black", res: "20"}, {id: "0", color: "red", res: "20"}, {id: "1"}, {id: "2"}, {id: "3"}, {id: "4"} ,{id: "5"}, {id: "6"}], 
+       nodes: [], 
        links: []
    })
+
    useEffect(() => {
-        setGraphState({
-            nodes: [{id: "0", color: "black", res: "20"}, {id: "0 ", color: "red", res: "20"}, {id: "1"}, {id: "2"}, {id: "3"}, {id: "4"} ,{id: "5"}, {id: "6"}], 
-            links: []
-        })
+        /**
+         * Call utility functions here to transform callTrace into a list of nodes. 
+         * Also transform the list of nodes into a list of edges. 
+         * Set nodes to list of nodes. 
+         * Incrementally add edge by edge to links from list of edges. 
+         */
+       setGraphState({
+           nodes: [], 
+           links: []
+       })
+       const listOfNodes = parseNodesFromCalls(callTrace, funcName)
+       const listOfEdges = parseEdgesFromNodes(listOfNodes)
        let interval
-       let index = 0
+       let links = []
        interval = setInterval(() => {
-            if (index === 6) {
-                clearInterval(interval)
-            } else {
-                let links = graphState.links
-                links.push({source: index.toString(), target: (index + 1).toString()})
+            if (listOfEdges.length > 0) {
+                // incrementally takes an item from listOfEdges and adds them to graphState.nodes
+                links.push(listOfEdges.shift())
                 setGraphState({
-                    nodes: graphState.nodes, 
+                    nodes: listOfNodes, 
                     links: links
                 })
+            } else {
+                clearInterval(interval)
             }
-            index++
        }, ANIMATION_SPEED);
        return () => clearInterval(interval);
-   }, []);
+   }, [callTrace]);
 
     const myConfig = {
         nodeHighlightBehavior: true,
@@ -62,11 +73,17 @@ const GraphComponent = (props) => {
         height: window.innerHeight
     };
 
-    return <Graph 
-        id="graph-id"
-        data = {graphState}
-        config = {myConfig}
-    />
+    return <Fragment>
+        {
+            graphState.nodes.length > 0 ? 
+            <Graph 
+                id="graph-id"
+                data = {graphState}
+                config = {myConfig}
+            /> : 
+            <h1>Graph placeholder</h1>
+        }
+    </Fragment>
 }
 
 export default GraphComponent

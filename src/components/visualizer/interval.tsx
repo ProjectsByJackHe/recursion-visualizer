@@ -2,6 +2,11 @@ import React, {Fragment, useEffect, useState} from 'react'
 
 
 const Interval = (props: any) => {
+    /* 
+        code here to always run whenever callTrace changes.
+        incrementally add values from callTrace to renderTrace
+    */
+    const ANIMATION_SPEED = 250; // milliseconds per interval
     const callTrace: string[][] = props.arrOfCalls
     const [renderTrace, setRenderTrace] = useState<string[][]>([])
     useEffect(() => {
@@ -16,7 +21,7 @@ const Interval = (props: any) => {
             } else {
                 clearInterval(interval)
             }
-        }, 250);
+        }, ANIMATION_SPEED);
         return () => clearInterval(interval);
     }, [callTrace]);
 

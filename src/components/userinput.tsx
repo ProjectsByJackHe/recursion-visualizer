@@ -16,7 +16,6 @@ const UserInput = (props: any) => {
             return 
         }
         console.log("function name: " + functionName)
-
         // extract function call. Result will be ['call', [start index, end index]]
         const functionCall = getFuncCall(code, functionName)
         if (functionCall === -1) {
@@ -24,7 +23,6 @@ const UserInput = (props: any) => {
             return 
         }
         console.log("function call: " + functionCall)
-
         // truncate function call 
         const codeToSend = truncateFuncCall(code, functionCall)
         console.log("code to send: " + codeToSend)
@@ -60,6 +58,7 @@ const UserInput = (props: any) => {
             for (let i = arrOfStr.length - 1; i >= 0; i--) {
                 arrOfCalls.push(arrOfStr[i].split(':'))
             }
+            console.log(arrOfCalls)
             props.setArrOfCalls(arrOfCalls)
             props.setFuncName(functionName)
         }

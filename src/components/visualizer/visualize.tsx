@@ -1,5 +1,7 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import Interval from './interval'
+import GraphComponent from './graph'
+
 /**
  * TODO: 
  *  - polish the visualizer component now with react springs 
@@ -10,7 +12,8 @@ import Interval from './interval'
 
 const Visualizer = (props: any) => {
     const callTrace = props.arrOfCalls 
-    return <Interval arrOfCalls = {callTrace} />
+    const funcName = props.name
+    return <GraphComponent />
 }
 
 export default Visualizer

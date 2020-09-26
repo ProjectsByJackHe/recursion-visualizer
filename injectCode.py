@@ -36,7 +36,7 @@ print(ePpPVE_GGJw)
 # injectInBeginningOfFunc2 = """], WZwr2a_lFWY)
 
 injectInBeginningOfFunc1 = """    
-  tFRcEOmkDM8 = JQGRg8XBnB4(["""
+    tFRcEOmkDM8 = JQGRg8XBnB4(["""
 injectInBeginningOfFunc2 = """], WZwr2a_lFWY)"""
 
 # we need to add indentation to every line here accordingly. 

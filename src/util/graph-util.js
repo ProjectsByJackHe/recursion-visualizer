@@ -31,7 +31,8 @@ export function parseNodesFromCalls(calls, funcName) {
         nodes.push({
             id: paramToAdd, 
             caller: callerToAdd, 
-            result: result
+            result: result, 
+            label: paramToAdd
         })
     }
     return nodes

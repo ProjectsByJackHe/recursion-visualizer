@@ -16,13 +16,12 @@ const GraphComponent = (props) => {
    const funcName = props.name 
    const callTrace = props.callTrace
    const ANIMATION_SPEED = props.renderSpeed; // milliseconds per interval
-   console.log(callTrace)
    const [graphState, setGraphState] = useState({
        nodes: [], 
        links: []
    })
 
-   useEffect(() => {
+    useEffect(() => {
         /**
          * Call utility functions here to transform callTrace into a list of nodes. 
          * Also transform the list of nodes into a list of edges. 
@@ -60,7 +59,8 @@ const GraphComponent = (props) => {
             highlightStrokeColor: "blue",
             fontSize: 30, 
             highlightFontSize: 50,
-            labelPosition: "top"
+            labelPosition: "top",
+            labelProperty: "label"
         },
         d3: {
             gravity: -1000
@@ -73,6 +73,39 @@ const GraphComponent = (props) => {
         height: window.innerHeight
     };
 
+    // include methods to manipulate the nodes
+    const onClickNode = (nodeId) => {
+        let nodesSoFar = graphState.nodes 
+        for (let i = 0; i < nodesSoFar.length; i++) {
+            if (nodesSoFar[i].id === nodeId) {
+                nodesSoFar[i] = {
+                    id: nodesSoFar[i].id, 
+                    caller: nodesSoFar[i].caller,
+                    result: nodesSoFar[i].result,
+                    label: nodesSoFar[i].result,
+                    color: "cyan"
+                }
+                setGraphState({
+                    nodes: nodesSoFar,
+                    links: graphState.links
+                }) 
+                setTimeout(() => {
+                    nodesSoFar[i] = {
+                        id: nodesSoFar[i].id, 
+                        caller: nodesSoFar[i].caller,
+                        result: nodesSoFar[i].result,
+                        label: nodesSoFar[i].id
+                    }
+                    setGraphState({
+                        nodes: nodesSoFar,
+                        links: graphState.links
+                    }) 
+                }, 2000);
+                break
+            }
+        }
+    }
+
     return <Fragment>
         {
             graphState.nodes.length > 0 ?  // !!! 
@@ -80,6 +113,7 @@ const GraphComponent = (props) => {
                 id="graph-id"
                 data = {graphState}
                 config = {myConfig}
+                onClickNode = {onClickNode}
             /> : 
             <h1>Graph placeholder</h1>
         }

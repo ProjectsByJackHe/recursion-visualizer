@@ -6,9 +6,17 @@ import { getFuncName, getFuncCall, truncateFuncCall } from '../util/utility-func
 
 
 const UserInput = (props: any) => {
-    const [code, setCode] = useState("# Don't use your tabs. This editor has smart indention enabled. Just press 'enter'")
+    const [submittedCode, setCode] = useState("# Don't use your tabs. This editor has smart indention enabled. Just press 'enter'")
     
     const runCode = async () => {
+        let code = ""
+        for (let i = 0; i < submittedCode.length; i++) {
+            if (submittedCode[i] === "\t") {
+                code += "    "
+            } else {
+                code += submittedCode[i]
+            }
+        }
         // extract function name 
         const functionName = getFuncName(code)
         if (functionName === -1) {
@@ -65,7 +73,7 @@ const UserInput = (props: any) => {
     }
     
     return <Fragment>
-        <CodeEditor code = {code} setCode = {setCode}/>
+        <CodeEditor code = {submittedCode} setCode = {setCode}/>
         <Controls runCode = {runCode}/> 
     </Fragment>
 }

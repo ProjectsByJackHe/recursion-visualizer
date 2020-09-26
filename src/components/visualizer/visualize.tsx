@@ -12,6 +12,7 @@ import GraphComponent from "./graph";
 const Visualizer = (props: any) => {
   const callTrace = props.arrOfCalls;
   const funcName = props.name;
+  console.log("name: " + funcName)
   const renderSpeed = props.renderSpeed;
   return <GraphComponent name={funcName} callTrace={callTrace} renderSpeed = {renderSpeed}/>;
 };

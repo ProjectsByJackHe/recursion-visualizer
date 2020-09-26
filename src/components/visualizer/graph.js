@@ -16,7 +16,7 @@ const GraphComponent = (props) => {
    const funcName = props.name 
    const callTrace = props.callTrace
    const ANIMATION_SPEED = props.renderSpeed; // milliseconds per interval
-
+   console.log(callTrace)
    const [graphState, setGraphState] = useState({
        nodes: [], 
        links: []
@@ -50,7 +50,7 @@ const GraphComponent = (props) => {
             }
        }, ANIMATION_SPEED);
        return () => clearInterval(interval);
-   }, [callTrace]);
+   }, [callTrace, funcName, ANIMATION_SPEED]);
 
     const myConfig = {
         nodeHighlightBehavior: true,
@@ -58,8 +58,8 @@ const GraphComponent = (props) => {
             color: "red",
             size: 500,
             highlightStrokeColor: "blue",
-            fontSize: 50, 
-            highlightFontSize: 80,
+            fontSize: 30, 
+            highlightFontSize: 50,
             labelPosition: "top"
         },
         d3: {
@@ -69,13 +69,13 @@ const GraphComponent = (props) => {
             highlightColor: "black",
         },
         directed: true,
-        width: window.innerWidth, 
+        width: window.innerWidth * 2, 
         height: window.innerHeight
     };
 
     return <Fragment>
         {
-            graphState.nodes.length > 0 ? 
+            graphState.nodes.length > 0 ?  // !!! 
             <Graph 
                 id="graph-id"
                 data = {graphState}

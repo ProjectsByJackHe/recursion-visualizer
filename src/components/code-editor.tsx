@@ -22,7 +22,9 @@ const CodeEditor = (props: any) => {
                 value={props.code}
                 options={{
                     ...DEFAULT_PYTHON_OPTIONS,
-                    theme: 'material'
+                    theme: 'material',
+                    indentUnit: 4,
+                    indentWithTabs: false
                 }} 
                 onBeforeChange={(editor, data, value) => {
                     // Execute anything before onChange

@@ -1,32 +1,22 @@
 
 class JQGRg8XBnB4: 
-    def __init__(self, params, level): 
+    def __init__(self, params, caller): 
         self.params = params 
-        self.level = level 
+        self.caller = caller 
         self.result = None 
 
 bwmSjveL3Lc = []
-def quicksort(WZwr2a_lFWY, li):    
-  tFRcEOmkDM8 = JQGRg8XBnB4([li], WZwr2a_lFWY)
-  WZwr2a_lFWY += 1 
-  if len(li) <= 1: 
-    fE2h3lGlOsk = li; tFRcEOmkDM8.result = fE2h3lGlOsk; bwmSjveL3Lc.append(tFRcEOmkDM8); return fE2h3lGlOsk
-  pivot = li[0]
-  l = []
-  e = []
-  g = []
-  for i in range(len(li)): 
-    if li[i] > pivot:
-      g.append(li[i])
-    elif li[i] == pivot:
-      e.append(li[i])
-    else:
-      l.append(li[i])    
-  fE2h3lGlOsk = quicksort(WZwr2a_lFWY, l) + e + quicksort(WZwr2a_lFWY, g) ; tFRcEOmkDM8.result = fE2h3lGlOsk; bwmSjveL3Lc.append(tFRcEOmkDM8); return fE2h3lGlOsk
+# Don't use your tabs. This editor has smart indention enabled. Just press 'enter'
 
-quicksort(0, [5,4,3,2,1])
-response = "|"
+def fib(WZwr2a_lFWY, n):    
+    tFRcEOmkDM8 = JQGRg8XBnB4([n], WZwr2a_lFWY)
+    if n == 1 or n == 2:
+        fE2h3lGlOsk = 1; tFRcEOmkDM8.result = fE2h3lGlOsk; bwmSjveL3Lc.append(tFRcEOmkDM8); return fE2h3lGlOsk;
+    fE2h3lGlOsk = fib([n], n - 1) + fib([n], n - 2); tFRcEOmkDM8.result = fE2h3lGlOsk; bwmSjveL3Lc.append(tFRcEOmkDM8); return fE2h3lGlOsk;
+
+fib(0, 6)
+ePpPVE_GGJw = "|"
 for call in bwmSjveL3Lc: 
-    segment = str(call.params) + ":" + str(call.result) + ":" + str(call.level) + "|"
-    response += segment
-print(response)
+    segment = str(call.params) + ":" + str(call.result) + ":" + str(call.caller) + "|"
+    ePpPVE_GGJw += segment
+print(ePpPVE_GGJw)

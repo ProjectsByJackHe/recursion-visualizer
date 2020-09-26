@@ -70,7 +70,8 @@ const GraphComponent = (props) => {
         },
         directed: true,
         width: window.innerWidth * 2, 
-        height: window.innerHeight
+        height: window.innerHeight,
+        staticGraph: false
     };
 
     // include methods to manipulate the nodes
@@ -90,17 +91,29 @@ const GraphComponent = (props) => {
                     links: graphState.links
                 }) 
                 setTimeout(() => {
-                    nodesSoFar[i] = {
-                        id: nodesSoFar[i].id, 
-                        caller: nodesSoFar[i].caller,
-                        result: nodesSoFar[i].result,
-                        label: nodesSoFar[i].id
+                    if (i === 0) {
+                        nodesSoFar[i] = {
+                            id: nodesSoFar[i].id, 
+                            caller: nodesSoFar[i].caller,
+                            result: nodesSoFar[i].result,
+                            label: nodesSoFar[i].id,
+                            color: "green",
+                            size: 800
+                        }
+                    } else {
+                        nodesSoFar[i] = {
+                            id: nodesSoFar[i].id, 
+                            caller: nodesSoFar[i].caller,
+                            result: nodesSoFar[i].result,
+                            label: nodesSoFar[i].id,
+                            color: "red"
+                        }
                     }
                     setGraphState({
                         nodes: nodesSoFar,
                         links: graphState.links
                     }) 
-                }, 2000);
+                }, 3000);
                 break
             }
         }
@@ -108,7 +121,7 @@ const GraphComponent = (props) => {
 
     return <Fragment>
         {
-            graphState.nodes.length > 0 ?  // !!! 
+            graphState.nodes.length > 0 ?  
             <Graph 
                 id="graph-id"
                 data = {graphState}

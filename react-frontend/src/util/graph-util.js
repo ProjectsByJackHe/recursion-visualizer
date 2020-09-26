@@ -32,8 +32,23 @@ export function parseNodesFromCalls(calls, funcName) {
             id: paramToAdd, 
             caller: callerToAdd, 
             result: result, 
-            label: paramToAdd
+            label: paramToAdd,
+            x: i * 100,
+            y: i * 100,
+            size: 500, 
+            color: "red"
         })
+    }
+    // give the first node extra size and change its color
+    if (nodes.length > 0) {
+        nodes[0].size = 800 
+        nodes[0].color = "green"
+    }
+    // look for all base cases and set their color to blue 
+    for (let i = 0; i < nodes.length; i++) {
+        if (checkIsBaseCase(nodes[i], nodes)) {
+            nodes[i].color = "blue"
+        }
     }
     return nodes
 }
@@ -57,4 +72,18 @@ export function parseEdgesFromNodes(listOfNodes) {
         })
     }
     return listOfEdges
+}
+
+function checkIsBaseCase(node, nodes) {
+    /**
+     * given a list of nodes: 
+     *  - check every other node in nodes and see if their caller is that node. 
+     *  - if so, then it's not a base case.
+     */
+    for (let i = 0; i < nodes.length; i++) {
+        if (node.id === nodes[i].caller) {
+            return false
+        }
+    }
+    return true
 }

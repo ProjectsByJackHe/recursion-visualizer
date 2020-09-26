@@ -41,7 +41,7 @@ injectInBeginningOfFunc2 = """], WZwr2a_lFWY)"""
 
 # we need to add indentation to every line here accordingly. 
 # constantLinesToAdd = "c.result = r; functionCalls_.append(c); return r"
-constantLinesToAdd = "tFRcEOmkDM8.result = fE2h3lGlOsk; bwmSjveL3Lc.append(tFRcEOmkDM8); return fE2h3lGlOsk"
+constantLinesToAdd = "tFRcEOmkDM8.result = fE2h3lGlOsk; bwmSjveL3Lc.append(tFRcEOmkDM8); return fE2h3lGlOsk;"
 
 
 

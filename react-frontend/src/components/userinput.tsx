@@ -61,12 +61,12 @@ const UserInput = (props: any) => {
         
         if (callTrace && noError) {
             // render callTrace
+            console.log(callTrace)
             const arrOfStr = callTrace.split('|') 
             const arrOfCalls = [] 
             for (let i = arrOfStr.length - 1; i >= 0; i--) {
                 arrOfCalls.push(arrOfStr[i].split(':'))
             }
-            console.log(arrOfCalls)
             props.setArrOfCalls(arrOfCalls)
             props.setFuncName(functionName)
         }

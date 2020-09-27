@@ -28,8 +28,8 @@ def execute():
             return functionTrace[1], 200
         else: 
             # case of invalid value
-            # set reponse status to 403
-            return functionTrace[1], 403
+            # set reponse status to 400
+            return functionTrace[1], 400
         return inputCode
     else: 
         # case of an invalid request

@@ -20,6 +20,7 @@ export function parseNodesFromCalls(calls, funcName) {
 
     let nodes = []
     for (let i = 0; i < calls.length; i++) {
+        console.log(calls[i])
         const param = calls[i][0]
         const result = calls[i][1]
         const caller = calls[i][2]

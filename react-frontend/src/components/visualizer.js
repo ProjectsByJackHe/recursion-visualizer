@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { Graph } from 'react-d3-graph'
-import { parseNodesFromCalls, parseEdgesFromNodes } from '../../util/graph-util'
+import { parseNodesFromCalls, parseEdgesFromNodes } from '../util/graph-util'
+import './visualizer.css'
 /**
  * TODO: 
  * - take a list of function calls, and write every parameter call to node. 
@@ -8,7 +9,7 @@ import { parseNodesFromCalls, parseEdgesFromNodes } from '../../util/graph-util'
  * - rename duplicate nodes by adding an extra whitespace. 
  */
 
-const GraphComponent = (props) => {
+const Visualizer = (props) => {
     /* 
         code here to always run whenever callTrace changes.
         incrementally add values from callTrace to renderTrace
@@ -36,6 +37,10 @@ const GraphComponent = (props) => {
        const listOfEdges = parseEdgesFromNodes(listOfNodes)
        let interval
        let links = []
+        setGraphState({
+            nodes: listOfNodes, 
+            links: []
+        })
        interval = setInterval(() => {
             if (listOfEdges.length > 0) {
                 // incrementally takes an item from listOfEdges and adds them to graphState.nodes
@@ -45,10 +50,13 @@ const GraphComponent = (props) => {
                     links: links
                 })
             } else {
+                // eslint-disable-next-line
+                props.setIsRunning(false)
                 clearInterval(interval)
             }
        }, ANIMATION_SPEED);
        return () => clearInterval(interval);
+       // eslint-disable-next-line
    }, [callTrace, funcName, ANIMATION_SPEED]);
 
     const myConfig = {
@@ -60,13 +68,14 @@ const GraphComponent = (props) => {
             fontSize: 30, 
             highlightFontSize: 50,
             labelPosition: "top",
-            labelProperty: "label"
+            labelProperty: "label", 
+            fontColor: "white"
         },
         d3: {
             gravity: -1000
         },
         link: {
-            highlightColor: "black",
+            highlightColor: "yellow",
         },
         directed: true,
         width: window.innerWidth * 2, 
@@ -79,35 +88,27 @@ const GraphComponent = (props) => {
         let nodesSoFar = graphState.nodes 
         for (let i = 0; i < nodesSoFar.length; i++) {
             if (nodesSoFar[i].id === nodeId) {
+                const originalColor = nodesSoFar[i].color
                 nodesSoFar[i] = {
                     id: nodesSoFar[i].id, 
                     caller: nodesSoFar[i].caller,
                     result: nodesSoFar[i].result,
                     label: nodesSoFar[i].result,
-                    color: "cyan"
+                    color: "cyan",
+                    size: nodesSoFar[i].size
                 }
                 setGraphState({
                     nodes: nodesSoFar,
                     links: graphState.links
                 }) 
                 setTimeout(() => {
-                    if (i === 0) {
-                        nodesSoFar[i] = {
-                            id: nodesSoFar[i].id, 
-                            caller: nodesSoFar[i].caller,
-                            result: nodesSoFar[i].result,
-                            label: nodesSoFar[i].id,
-                            color: "green",
-                            size: 800
-                        }
-                    } else {
-                        nodesSoFar[i] = {
-                            id: nodesSoFar[i].id, 
-                            caller: nodesSoFar[i].caller,
-                            result: nodesSoFar[i].result,
-                            label: nodesSoFar[i].id,
-                            color: "red"
-                        }
+                    nodesSoFar[i] = {
+                        id: nodesSoFar[i].id, 
+                        caller: nodesSoFar[i].caller,
+                        result: nodesSoFar[i].result,
+                        label: nodesSoFar[i].id,
+                        color: originalColor,
+                        size: nodesSoFar[i].size
                     }
                     setGraphState({
                         nodes: nodesSoFar,
@@ -119,18 +120,41 @@ const GraphComponent = (props) => {
         }
     }
 
+    let placeHolder;
+
+    if (props.isLoading) {
+        console.log(props.isLoading)
+        placeHolder = (
+            <div className="circle">
+            <div className="circleBig circleLine">
+                <div className="twoQuarterBig circleLine">
+                <div className="lineSmallLeft line"></div>
+                <div className="lineSmallRight line"></div>
+                    <div className="twoQuarterSmall circleLine">
+                    <div className="lineBigUp line"></div>
+                    <div className="lineBigDown line"></div>
+                    <div className="circleSmall circleLine"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        )
+    } else {
+        placeHolder = <h1>Graph placeholder</h1>
+    }
+
     return <Fragment>
         {
-            graphState.nodes.length > 0 ?  
+            graphState.nodes.length > 0 && !props.isLoading ?  
             <Graph 
                 id="graph-id"
                 data = {graphState}
                 config = {myConfig}
                 onClickNode = {onClickNode}
             /> : 
-            <h1>Graph placeholder</h1>
+            placeHolder
         }
     </Fragment>
 }
 
-export default GraphComponent
+export default Visualizer

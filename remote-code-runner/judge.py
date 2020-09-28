@@ -19,6 +19,8 @@ def sendCodeToJudge(code):
     responseObj = json.loads(response.text)
     if 'error' in responseObj: 
         return 'error'
+    if 'token' not in responseObj:
+        return 'error'
     token = responseObj['token']
     URL = "https://judge0.p.rapidapi.com/submissions/" + token
     HEADERS = {
@@ -29,4 +31,4 @@ def sendCodeToJudge(code):
     codeSubmissionResponse = json.loads(subResponse.text) 
     print(codeSubmissionResponse)
     output = codeSubmissionResponse['stdout']
-    return output
+    return [output, token]

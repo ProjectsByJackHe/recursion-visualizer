@@ -46,7 +46,7 @@ const UserInput = (props: any) => {
     try {
       // send HTTP request to flask server and store
       // response inside callTrace
-      const domain = process.env.BACKEND || "http://localhost:5000";
+      const domain = "http://recursion0r94s8df984.herokuapp.com";
      
       const options = `/execute?funcName=${functionName}&funcCall=${functionCall[0]}`;
       const fetchConfig = {
@@ -66,6 +66,7 @@ const UserInput = (props: any) => {
       noError = false;
     }
     props.setIsLoading(false)
+    console.log(callTrace)
     if (callTrace && noError) {
       // render callTrace
       props.setIsRunning(true)

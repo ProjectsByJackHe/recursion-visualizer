@@ -1,10 +1,7 @@
 import subprocess
 import injectCode as ij 
 import judge as j
-
-# TODO: 
-# - design & develop the frontend recursive render structure
-# - add parameter checks on the backend
+import tryget as tg
 
 def runCode(inputCode, inputFunctionName, inputFunctionCall):
     # On the frontend, we will parse the input to get the 
@@ -15,7 +12,14 @@ def runCode(inputCode, inputFunctionName, inputFunctionCall):
     # inputCode here is truncated to exclude the single function call. 
     readyToExe = ij.injectCode(inputCode, inputFunctionName, inputFunctionCall)
     res = j.sendCodeToJudge(readyToExe)
-    if res == None or res == 'error':
+    if res == 'error':
         return (False, "Be sure to follow all rules laid out in the instructions: Make sure there are no syntax errors, logic errors, and infinite recursions... and any funky business ;)")
-    output = res[1:len(res) - 2]
+    
+    if res[0] == None:
+        res[0] = tg.tryGet(res[1])
+
+    if res[0] == None:
+        return (False, "Took too long. I didn't pay for a premium server, sorry about that.")
+
+    output = res[0][1:len(res[0]) - 2]
     return (True, output)

@@ -89,6 +89,8 @@ const UserInput = (props: any) => {
         isRunning={props.isRunning}
         reset={props.reset}
         setArrOfCalls={props.setArrOfCalls} 
+        jelly={props.jelly}
+        setJelly={props.setJelly}
       />
     </Fragment>
   );

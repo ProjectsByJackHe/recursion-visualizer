@@ -43,6 +43,7 @@ const reverseString = (str) => {
     }
     return ans
 }
+
 // getFuncCall helper
 const findCall = (s, code, functionName) => {
     const lookFor = functionName
@@ -56,6 +57,7 @@ const findCall = (s, code, functionName) => {
     let check1 = s - lookFor.length - 1 >= 0 && code[s - lookFor.length - 1] === "f"
     let check2 = s - lookFor.length - 2 >= 0 && code[s - lookFor.length - 2] === "e"
     let check3 = s - lookFor.length - 3 >= 0 && code[s - lookFor.length - 3] === "d"
+
     if (check1 && check2 && check3) {
         return false
     }
@@ -83,9 +85,9 @@ export function getFuncCall(code, functionName) {
     // if no ")" was found, then return -1. 
     // once entire function call is collected, store i, and store i + functionCall.length 
     // return ['call', [i, i + functionCall.length]]
-
+    const lookFor = reverseString(functionName)
     for (let i = code.length - 1; i >= 0; i--) {
-        let call = findCall(i, code, reverseString(functionName))
+        let call = findCall(i, code, lookFor)
         if (call) {
             return [call, [i - functionName.length, i + (call.length - functionName.length)]]
         }

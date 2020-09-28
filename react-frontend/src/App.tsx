@@ -9,7 +9,7 @@ function App() {
   const [renderSpeed, setRenderSpeed] = useState(500) 
   const [isRunning, setIsRunning] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [notJelly, setJelly] = useState(false)
+  const [jelly, setJelly] = useState(false)
 
   return (
     <Fragment>
@@ -20,6 +20,8 @@ function App() {
         setIsRunning={setIsRunning}
         setIsLoading={setIsLoading}
         isRunning={isRunning} 
+        setJelly={setJelly}
+        jelly={jelly}
       />
       <Visualizer
         name={funcName}
@@ -27,7 +29,7 @@ function App() {
         renderSpeed={renderSpeed}
         setIsRunning={setIsRunning}
         isLoading={isLoading}
-        notJelly={notJelly}
+        jelly={jelly}
       />
     </Fragment>
   );

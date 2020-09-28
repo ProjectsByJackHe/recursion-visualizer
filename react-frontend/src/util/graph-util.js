@@ -12,6 +12,8 @@ export function parseNodesFromCalls(calls, funcName) {
      * 
      */
     let spaces = {}
+    let heights = {}
+
     for (let call of calls) {
         spaces[call[0]] = ""
     }
@@ -29,13 +31,22 @@ export function parseNodesFromCalls(calls, funcName) {
         callerToAdd = funcName + callerToAdd.substring(0, callerToAdd.length - 1)
         const paramToAdd = funcName + "(" + param.substring(1, param.length - 1) + ")" + spaces[param] 
         spaces[param] += " "
+        /**
+         * Nodes with the same caller should have the same height. 
+         */
+        let heightToAdd = i * 100
+        if (callerToAdd in heights) {
+            heightToAdd = heights[callerToAdd]
+        } else {
+            heights[callerToAdd] = heightToAdd
+        }
         nodes.push({
             id: paramToAdd, 
             caller: callerToAdd, 
             result: result, 
             label: paramToAdd,
             x: i * 100,
-            y: i * 100,
+            y: heightToAdd,
             size: 500, 
             color: "red"
         })

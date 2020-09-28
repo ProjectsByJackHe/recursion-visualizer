@@ -64,7 +64,6 @@ const Visualizer = (props) => {
        return () => clearInterval(interval);
        // eslint-disable-next-line
    }, [callTrace, funcName, ANIMATION_SPEED]);
-
     const myConfig = {
         nodeHighlightBehavior: true,
         node: {
@@ -86,7 +85,7 @@ const Visualizer = (props) => {
         directed: true,
         width: window.innerWidth * 2, 
         height: window.innerHeight,
-        staticGraph: !props.notJelly
+        staticGraph: !props.jelly
     };
     // include methods to manipulate the nodes
     const onClickNode = (nodeId) => {

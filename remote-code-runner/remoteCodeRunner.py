@@ -2,6 +2,10 @@ import subprocess
 import injectCode as ij 
 import judge as j
 
+# TODO: 
+# - design & develop the frontend recursive render structure
+# - add parameter checks on the backend
+
 def runCode(inputCode, inputFunctionName, inputFunctionCall):
     # On the frontend, we will parse the input to get the 
     # - function name 
@@ -12,6 +16,6 @@ def runCode(inputCode, inputFunctionName, inputFunctionCall):
     readyToExe = ij.injectCode(inputCode, inputFunctionName, inputFunctionCall)
     res = j.sendCodeToJudge(readyToExe)
     if res == None or res == 'error':
-        return (False, "Make sure there are no syntax errors, logic errors, and infinite recursions... and any funky business ;)")
+        return (False, "Be sure to follow all rules laid out in the instructions: Make sure there are no syntax errors, logic errors, and infinite recursions... and any funky business ;)")
     output = res[1:len(res) - 2]
     return (True, output)

@@ -3,6 +3,7 @@ from flask import request
 from flask_cors import CORS
 import parseinput as pi
 import remoteCodeRunner as rc
+import hasImport as hi
 
 app = flask.Flask(__name__) 
 CORS(app)
@@ -18,10 +19,16 @@ def execute():
     if 'funcName' in request.args and 'funcCall' in request.args: 
         funcName = request.args['funcName'] 
         funcCall = request.args['funcCall']
+        if funcName != funcCall[:len(funcName)]:
+            return "Check and make sure you defined EXACTLY one function.", 400
         body = str(request.data)
         inputCode = pi.parseInput(body)
-        functionTrace = rc.runCode(inputCode, funcName, funcCall)
 
+        # check import statements 
+        if hi.hasImport(inputCode): 
+            return "Whatever you're trying to do, just don't.", 400
+
+        functionTrace = rc.runCode(inputCode, funcName, funcCall)
         if functionTrace[0]:  
             # success case
             # set response status to 200

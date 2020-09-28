@@ -12,7 +12,6 @@ def runCode(inputCode, inputFunctionName, inputFunctionCall):
     readyToExe = ij.injectCode(inputCode, inputFunctionName, inputFunctionCall)
     res = j.sendCodeToJudge(readyToExe)
     if res == None or res == 'error':
-        return (False, "There was a problem executing your code. Make sure there are no syntax errors, logic errors, and infinite recursions.")
+        return (False, "Make sure there are no syntax errors, logic errors, and infinite recursions... and any funky business ;)")
     output = res[1:len(res) - 2]
-    print(output)
     return (True, output)

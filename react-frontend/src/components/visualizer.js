@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { Graph } from 'react-d3-graph'
 import { parseNodesFromCalls, parseEdgesFromNodes } from '../util/graph-util'
+import OutlinedCard from './placeholder'
 import './visualizer.css'
 /**
  * TODO: 
@@ -140,7 +141,10 @@ const Visualizer = (props) => {
             </div>
         )
     } else {
-        placeHolder = <h1>Graph placeholder</h1>
+        // put promo stuff and instructions here
+        placeHolder = (
+            <OutlinedCard />
+        )
     }
 
     return <Fragment>

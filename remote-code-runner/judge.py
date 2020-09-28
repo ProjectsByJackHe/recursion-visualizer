@@ -3,13 +3,13 @@ import requests
 import json 
 
 API_KEY = os.environ.get('API_KEY')
-
+ 
 def sendCodeToJudge(code): 
     print(code)
     print('________________________________________\n\n')
     url = "https://judge0.p.rapidapi.com/submissions"
     payload = { "language_id": 71, "source_code": code}
-    headers = {
+    headers = { 
         'x-rapidapi-host': "judge0.p.rapidapi.com",
         'x-rapidapi-key': API_KEY,
         'content-type': "application/json",

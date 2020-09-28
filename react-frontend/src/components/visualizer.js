@@ -3,12 +3,7 @@ import { Graph } from 'react-d3-graph'
 import { parseNodesFromCalls, parseEdgesFromNodes } from '../util/graph-util'
 import OutlinedCard from './placeholder'
 import './visualizer.css'
-/**
- * TODO: 
- * - take a list of function calls, and write every parameter call to node. 
- * - rewrite logic in backend to retrieve a node and it's caller instead of level. 
- * - rename duplicate nodes by adding an extra whitespace. 
- */
+
 
 const Visualizer = (props) => {
     /* 
@@ -37,17 +32,27 @@ const Visualizer = (props) => {
        const listOfNodes = parseNodesFromCalls(callTrace, funcName)
        const listOfEdges = parseEdgesFromNodes(listOfNodes)
        let interval
+       let nodes = []
        let links = []
-        setGraphState({
-            nodes: listOfNodes, 
-            links: []
-        })
+       if (listOfNodes.length > 0) {
+            nodes.push(listOfNodes.shift())
+            setGraphState({
+                nodes: nodes, 
+                links: []
+            })
+       } else {
+            setGraphState({
+                nodes: [], 
+                links: []
+            })
+       }
        interval = setInterval(() => {
             if (listOfEdges.length > 0) {
                 // incrementally takes an item from listOfEdges and adds them to graphState.nodes
+                nodes.push(listOfNodes.shift())
                 links.push(listOfEdges.shift())
                 setGraphState({
-                    nodes: listOfNodes, 
+                    nodes: nodes, 
                     links: links
                 })
             } else {
@@ -81,9 +86,8 @@ const Visualizer = (props) => {
         directed: true,
         width: window.innerWidth * 2, 
         height: window.innerHeight,
-        staticGraph: false
+        staticGraph: !props.notJelly
     };
-
     // include methods to manipulate the nodes
     const onClickNode = (nodeId) => {
         let nodesSoFar = graphState.nodes 

@@ -47,11 +47,11 @@ export default function OutlinedCard() {
           component="p"
           style={{ marginLeft: "30px" }}
         >
-          - You MUST include at least 1 recursive function
-          <br />
-          - If you defined more than 1 function, please specify which one to track.  
+          - You MUST define EXACTLY 1 recursive function
           <br />
           - NO empty return statements. You gotta return something.
+          <br />
+          - DO NOT include any 'print(...)' statements!
           <br />
           - Be sure to call your function in the end.
           <br />

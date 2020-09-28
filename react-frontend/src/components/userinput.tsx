@@ -9,7 +9,7 @@ import {
 
 const UserInput = (props: any) => {
   const [submittedCode, setCode] = useState(
-    "# Don't use your tabs. This editor has smart indention enabled. Just press 'enter'"
+    "# DO NOT include any 'print(...)' statements!"
   );
 
   const runCode = async () => {
@@ -47,6 +47,7 @@ const UserInput = (props: any) => {
       // send HTTP request to flask server and store
       // response inside callTrace
       const domain = process.env.BACKEND || "http://localhost:5000";
+     
       const options = `/execute?funcName=${functionName}&funcCall=${functionCall[0]}`;
       const fetchConfig = {
         method: "POST",
@@ -86,6 +87,8 @@ const UserInput = (props: any) => {
       <Controls
         runCode={runCode}
         isRunning={props.isRunning}
+        reset={props.reset}
+        setArrOfCalls={props.setArrOfCalls} 
       />
     </Fragment>
   );

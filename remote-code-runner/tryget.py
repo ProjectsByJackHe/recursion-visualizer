@@ -4,7 +4,7 @@ import requests
 import json 
 
 
-API_KEY = os.environ.get('API_KEY')
+API_KEY = os.environ.get('API_KEY') 
 
 def tryGet(token):
     time.sleep(10)

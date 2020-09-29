@@ -20,6 +20,8 @@ def execute():
         funcName = request.args['funcName'] 
         funcCall = request.args['funcCall']
         if funcName != funcCall[:len(funcName)]:
+            print(funcName)
+            print(funcCall[:len(funcName)] != funcName)
             return "Check and make sure you defined EXACTLY one function.", 400
         body = str(request.data)
         inputCode = pi.parseInput(body)

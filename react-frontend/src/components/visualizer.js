@@ -12,7 +12,7 @@ const Visualizer = (props) => {
     */
    const funcName = props.name 
    const callTrace = props.callTrace
-   const ANIMATION_SPEED = props.renderSpeed; // milliseconds per interval
+   const ANIMATION_SPEED = 1100 - props.renderSpeed * 10; // milliseconds per interval
    const [graphState, setGraphState] = useState({
        nodes: [], 
        links: []

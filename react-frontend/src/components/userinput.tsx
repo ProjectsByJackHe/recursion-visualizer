@@ -9,7 +9,7 @@ import {
 
 const UserInput = (props: any) => {
   const [submittedCode, setCode] = useState(
-    "# DO NOT include any 'print(...)' statements!"
+    "# DO NOT include any 'print(...)' statements! \n\ndef fib(x):\n    if x == 1 or x == 2:\n        return 1\n    return fib(x - 1) + fib(x - 2)\n\nfib(10)"
   );
 
   const runCode = async () => {
@@ -46,7 +46,7 @@ const UserInput = (props: any) => {
     try {
       // send HTTP request to flask server and store
       // response inside callTrace
-      const domain = "https://recursion0r94s8df984.herokuapp.com";
+      const domain = "<BACKEND URL REMOTE CODE RUNNER>";
      
       const options = `/execute?funcName=${functionName}&funcCall=${functionCall[0]}`;
       const fetchConfig = {
@@ -92,6 +92,7 @@ const UserInput = (props: any) => {
         setArrOfCalls={props.setArrOfCalls} 
         jelly={props.jelly}
         setJelly={props.setJelly}
+        setRenderSpeed={props.setRenderSpeed}
       />
     </Fragment>
   );

@@ -1,6 +1,6 @@
  /* eslint-disable */ 
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Slider } from "@material-ui/core";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "./controls.css";
@@ -9,6 +9,10 @@ const Controls = (props: any) => {
 
   const handleChange = () => {
     props.setJelly(!props.jelly)
+  }
+
+  const onSlide = (e: any, newValue: number | number[]) => {
+    props.setRenderSpeed(newValue)
   }
 
   return (
@@ -33,7 +37,6 @@ const Controls = (props: any) => {
           {" "}
           Instructions + Reset{" "}
         </Button>
-        
       
          <FormControlLabel
           style={{marginLeft: "10px", marginTop: "10px"}}
@@ -43,6 +46,15 @@ const Controls = (props: any) => {
             color="primary"
           />}
           label="Jelly"
+        />
+
+        <Slider
+          defaultValue={50}
+          aria-labelledby="discrete-slider-always"
+          step={1}
+          valueLabelDisplay="on"
+          onChange={onSlide}
+          min={10}
         />
       </div>
   );

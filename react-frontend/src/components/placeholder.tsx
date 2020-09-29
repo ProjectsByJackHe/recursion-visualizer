@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 593
+    maxWidth: 593,
   },
   bullet: {
     display: "inline-block",
@@ -25,7 +25,11 @@ export default function OutlinedCard() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} variant="outlined" style={{marginLeft: "auto", marginRight: "auto", marginTop: "50px"}}>
+    <Card
+      className={classes.root}
+      variant="outlined"
+      style={{ marginLeft: "auto", marginRight: "auto", marginTop: "50px" }}
+    >
       <CardContent>
         <Typography variant="h4" component="h2">
           Instructions
@@ -68,7 +72,8 @@ export default function OutlinedCard() {
         >
           - If all goes well, you will see a nice recursive visualization of
           your function <br />
-          - Green node == initial call. Red node == recursive call. Blue node == base case. <br />
+          - Green node == initial call. Red node == recursive call. Blue node ==
+          base case. <br />
           - Turn 'Jelly' off for a static graph <br />- Click on any Node and
           view it's return value
         </Typography>
@@ -77,10 +82,10 @@ export default function OutlinedCard() {
         <iframe
           width="560"
           height="315"
-          src="https://www.youtube.com/embed/QwUZxCBtfLw"
+          src="https://www.youtube.com/embed/-7rJv-yiTzc"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          frameBorder = "0"
         ></iframe>
       </CardContent>
     </Card>

@@ -6,7 +6,7 @@ import Visualizer from './components/visualizer'
 function App() {
   const [arrOfCalls, setArrOfCalls] = useState([]) 
   const [funcName, setFuncName] = useState("")
-  const [renderSpeed, setRenderSpeed] = useState(600) 
+  const [renderSpeed, setRenderSpeed] = useState(50) 
   const [isRunning, setIsRunning] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [jelly, setJelly] = useState(false)

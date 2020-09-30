@@ -12,14 +12,24 @@ def runCode(inputCode, inputFunctionName, inputFunctionCall):
     # inputCode here is truncated to exclude the single function call. 
     readyToExe = ij.injectCode(inputCode, inputFunctionName, inputFunctionCall)
     res = j.sendCodeToJudge(readyToExe)
-    if res == 'error':
+    if res == False: # couldn't even POST the user's code
         return (False, "Be sure to follow all rules laid out in the instructions: Make sure there are no syntax errors, logic errors, and infinite recursions... and any funky business ;)")
     
-    if res[0] == None:
-        res[0] = tg.tryGet(res[1])
+    codeSubmissionResults = res[0] # output object with stdout and stderr
+    submissionToken = res[1] # token reference ID
+    
+    # do processing checks first before doing error checks 
+    if codeSubmissionResults['status']['id'] < 3: 
+        # still processing...
+        codeSubmissionResults = tg.tryGet(submissionToken) 
 
-    if res[0] == None:
-        return (False, "Took too long. I didn't pay for a premium server, sorry about that.")
-
-    output = res[0][1:len(res[0]) - 2]
-    return (True, output)
+    if codeSubmissionResults['status']['id'] == 3:
+        # success case
+        output = codeSubmissionResults['stdout'][1:len(codeSubmissionResults['stdout']) - 2]
+        return (True, output)
+    else: 
+        # error case
+        if codeSubmissionResults['stderr']:
+            return (False, codeSubmissionResults['stderr'])
+        else: 
+            return (False, "Unknown error.")

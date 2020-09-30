@@ -46,7 +46,7 @@ const UserInput = (props: any) => {
     try {
       // send HTTP request to flask server and store
       // response inside callTrace
-      const domain = "<BACKEND URL REMOTE CODE RUNNER>";
+      const domain = "https://recursion0r94s8df984.herokuapp.com";
      
       const options = `/execute?funcName=${functionName}&funcCall=${functionCall[0]}`;
       const fetchConfig = {

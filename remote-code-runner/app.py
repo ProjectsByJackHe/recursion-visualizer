@@ -39,7 +39,6 @@ def execute():
             # case of invalid value
             # set reponse status to 400
             return functionTrace[1], 400
-        return inputCode
     else: 
         # case of an invalid request
         return "Please specify both the function name and the initial function call."

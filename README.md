@@ -1,3 +1,8 @@
+# This project is no longer being maintained!
+
+As Server hosting fees started racking up due to many many infinite recurisive loops being submitted to what is more or less a hackathon project, 
+I decided it was better to just pull the plug. Sorry :(
+
 # Recursion Visualizer 
 
 Ever wondered what the recursive structure of your Leetcode algorithm looks like? 
